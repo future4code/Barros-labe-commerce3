@@ -1,9 +1,9 @@
-import {caminha} from './img/caminha'
-import {casaco} from './img/casaco'
-import {shampoo} from './img/shampoo'
-import {peitoral} from './img/peitoral'
-import {arranhador} from './img/arranhador'
-import {racao} from './img/racao'
+import caminha from './img/Caminha.jpg'
+import casaco from './img/Casaco.jpg'
+import shampoo from './img/Shampoo.jpg'
+import peitoral from './img/Peitoral.jpg'
+import arranhador from './img/Arranhador.jpg'
+import racao from './img/racao.png'
 
 
 export const MockDeDados = [
