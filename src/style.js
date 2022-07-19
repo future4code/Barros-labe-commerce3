@@ -11,48 +11,68 @@ export const ContainerGeral = styled.section `
 export const Produto = styled.section `
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
     border: 1px solid black;
-    padding: 15px;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.267);
+    padding: 15px 0;
     align-items: center;
     button {
         width: 50%;
         font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        padding: 10px 0;
+        background-color: rgb(204, 204, 204);
         cursor: pointer;
+        :hover {
+            background-color: rgba(204, 204, 204, 0.479);
+        }
     }
     img {
-        width: 50%;
+        width: 90%;
     }
 `
 
 
 export const ContainerProdutosCarrinho = styled.section `
     display: flex;
-    gap: 20px;
     section {
         display: flex;
         flex-direction: column;
+        align-items: center;
         aside {
             display: flex;
             justify-content: space-between;
-            margin: 0 60px;
+            align-items: baseline;
+            padding: 0 30px;
+            background-color: rgba(204, 204, 204, 0.479);
+            width: 75%;
             p {
-                margin-top: 20px;
+                margin-top: 22px;
+            }
+            select {
+                padding: 8px;
+                width: 120px;
             }
         }
         div {
             display: grid;
             grid-template-columns: 40% 40%;
-            margin-left: 30px;
-            gap: 20px;
-            padding: 20px 40px;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
         }
     }
 `
 
-
-
-
+export const ContainerFiltrosProdutos = styled.section `
+    display: flex;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+`
 
 
 
