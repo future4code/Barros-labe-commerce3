@@ -26,7 +26,7 @@ export function Filtros() {
 
             </form>
             <Produtos valorMin={filtroValorMinimo} setValorMin={setFiltroValorMinimo} valormax={filtroValorMaximo} setValorMax={setFiltroValorMaximo}
-            buscaNome={filtroBuscaPorNome} quantidade={quantidadeProdutosDisponiveis}/>
+            buscaNome={filtroBuscaPorNome} quantidade={quantidadeProdutosDisponiveis} setQuantidade={setQuantidadeProdutosDisponiveis}/>
         </ContainerFiltrosProdutos>
     )
 }
