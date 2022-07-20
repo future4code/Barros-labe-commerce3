@@ -7,6 +7,7 @@ export function Filtros() {
     const [filtroValorMinimo, setFiltroValorMinimo] = useState("")
     const [filtroValorMaximo, setFiltroValorMaximo] = useState("")
     const [filtroBuscaPorNome, setFiltroBuscaPorNome] = useState("")
+    const [quantidadeProdutosDisponiveis, setQuantidadeProdutosDisponiveis] = useState(6)
 
 
     return (
@@ -25,7 +26,7 @@ export function Filtros() {
 
             </form>
             <Produtos valorMin={filtroValorMinimo} setValorMin={setFiltroValorMinimo} valormax={filtroValorMaximo} setValorMax={setFiltroValorMaximo}
-            buscaNome={filtroBuscaPorNome}/>
+            buscaNome={filtroBuscaPorNome} quantidade={quantidadeProdutosDisponiveis}/>
         </ContainerFiltrosProdutos>
     )
 }

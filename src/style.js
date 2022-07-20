@@ -62,6 +62,10 @@ export const ContainerProdutosCarrinho = styled.section `
 
 //COMPONENTE FILTROS
 
+export const Filtros = styled.section `
+
+`
+
 
 
 
