@@ -82,6 +82,10 @@ export const ContainerFiltrosProdutos = styled.section `
 
 //COMPONENTE FILTROS
 
+export const Filtros = styled.section `
+
+`
+
 
 
 
