@@ -25,7 +25,7 @@ export function Filtros() {
                 <input type="text" value={filtroBuscaPorNome} onChange={e => setFiltroBuscaPorNome(e.target.value)}></input>
 
             </form>
-            <Produtos valorMin={filtroValorMinimo} setValorMin={setFiltroValorMinimo} valormax={filtroValorMaximo} setValorMax={setFiltroValorMaximo}
+            <Produtos valorMin={filtroValorMinimo} setValorMin={setFiltroValorMinimo} valorMax={filtroValorMaximo} setValorMax={setFiltroValorMaximo}
             buscaNome={filtroBuscaPorNome} quantidade={quantidadeProdutosDisponiveis} setQuantidade={setQuantidadeProdutosDisponiveis}/>
         </ContainerFiltrosProdutos>
     )
