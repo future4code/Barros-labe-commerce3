@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {ContainerProdutosCarrinho} from '../style'
 import {MockDeDados} from '../MockDeDados'
 import {Carrinho} from './Carrinho'
@@ -16,7 +16,7 @@ export function Produtos(props) {
 
     //Ao clicar no botão de adicionar ao carrinho
     const handleOnClick = (nomeSelecionado) => { 
-        
+
         let arrayAtualizado = arrayProdCarrinho
 
         if (arrayProdCarrinho.length === 0) {
@@ -40,14 +40,22 @@ export function Produtos(props) {
     }
 
 
+    //Removendo itens do carrinho
+    const handleRemover = (nomeDeletado) => {
+        const arrayAtualizado = arrayProdCarrinho.filter(item => item.nome !== nomeDeletado)
+        setSomaCarrinho(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
+        return setArrayProdCarrinho(arrayAtualizado)
+    }
+
+
     //Salvando os dados do carrinho no local storage
     localStorage.setItem("soma", ""+somaCarrinho)
-    localStorage.setItem("arrayProdutos", ""+arrayProdCarrinho)
+    localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
     
-    useEffect(() => {
-        localStorage.getItem("soma")
-        localStorage.getItem("arrayProdutos")
-    }, [somaCarrinho, arrayProdCarrinho])
+    
+    const renderSoma = localStorage.getItem("soma")
+    const renderArray = JSON.parse(localStorage.getItem("arrayProdutos"))
+   
 
 
     //Renderizar todos os produtos (quando nenhum filtro é usado)
@@ -131,7 +139,7 @@ export function Produtos(props) {
                 </div>
             </section>
 
-            <Carrinho arrayProdutos={arrayProdCarrinho} setArrayProdutos={setArrayProdCarrinho} soma={somaCarrinho} setSoma={setSomaCarrinho}/>
+            <Carrinho renderArray={renderArray} renderSoma={renderSoma} remover={handleRemover} />
        </ContainerProdutosCarrinho>
     )
 }
