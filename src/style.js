@@ -75,7 +75,25 @@ export const ContainerFiltrosProdutos = styled.section `
         display: flex;
         flex-direction: column;
         gap: 8px;
+        background-color: rgba(204, 204, 204, 0.479);
+        padding: 30px 30px;
+        height: 100vh;
+
+        h3 {
+            padding: 0 20px;
+            height: 5vh;
+             
+        }
+        label {
+            height: 3vh;
+        }
+        input {
+            height: 3vh;
+            border-radius: 1vh;
+        }
+        
     }
+    
 `
 
 
