@@ -11,14 +11,51 @@ export function Produtos(props) {
     
     const [sort, setSort] = useState("crescente")
     const [arrayProdCarrinho, setArrayProdCarrinho] = useState([])
-
+    const [somaCarrinho, setSomaCarrinho] = useState(0)
     
 
     //Ao clicar no botão de adicionar ao carrinho
     const handleOnClick = (nomeSelecionado) => { 
-        const arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
-        return setArrayProdCarrinho([...arrayProdCarrinho, ...arrayAtualizado])
+
+        let arrayAtualizado = arrayProdCarrinho
+
+        if (arrayProdCarrinho.length === 0) {
+            arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
+            setSomaCarrinho(somaCarrinho + (arrayAtualizado[0].preco))
+            return setArrayProdCarrinho([...arrayAtualizado])
+        } else {
+            for (let i = 0; i < arrayAtualizado.length; i++) {
+                if (nomeSelecionado === arrayAtualizado[i].nome) {
+                    arrayAtualizado[i].quantidade += 1
+                    setSomaCarrinho(somaCarrinho + arrayAtualizado[i].preco)
+                    return setArrayProdCarrinho([...arrayAtualizado])
+                }
+                if (i === arrayAtualizado.length - 1) {
+                    arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
+                    setSomaCarrinho(somaCarrinho + arrayAtualizado[arrayAtualizado.length-1].preco)
+                    return setArrayProdCarrinho([...arrayProdCarrinho, ...arrayAtualizado])
+                }
+            }
+        }    
     }
+
+
+    //Removendo itens do carrinho
+    const handleRemover = (nomeDeletado) => {
+        const arrayAtualizado = arrayProdCarrinho.filter(item => item.nome !== nomeDeletado)
+        setSomaCarrinho(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
+        return setArrayProdCarrinho(arrayAtualizado)
+    }
+
+
+    //Salvando os dados do carrinho no local storage
+    localStorage.setItem("soma", ""+somaCarrinho)
+    localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
+    
+    
+    const renderSoma = localStorage.getItem("soma")
+    const renderArray = JSON.parse(localStorage.getItem("arrayProdutos"))
+   
 
 
     //Renderizar todos os produtos (quando nenhum filtro é usado)
@@ -54,7 +91,7 @@ export function Produtos(props) {
         }
 
         const produtosFiltrados = MockDeDados.filter ((item) => {
-            return item.preco >= props.valorMin && item.preco <= props.valorMax && item.nome.startsWith(props.buscaNome)
+            return item.preco >= props.valorMin && item.preco <= props.valorMax && item.nome.includes(props.buscaNome)
         })
         
         props.setQuantidade(produtosFiltrados.length)
@@ -102,7 +139,7 @@ export function Produtos(props) {
                 </div>
             </section>
 
-            <Carrinho arrayProdutos={arrayProdCarrinho} setArrayProdutos={setArrayProdCarrinho}/>
+            <Carrinho renderArray={renderArray} renderSoma={renderSoma} remover={handleRemover} />
        </ContainerProdutosCarrinho>
     )
 }

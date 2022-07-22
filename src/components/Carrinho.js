@@ -4,7 +4,6 @@ import { ProdAddCarrinho } from "./ProdAddCarrinho"
 
 export function Carrinho(props) {
 
-
     const handleRemover = (nomeDeletado) => {
         const arrayAtualizado = props.arrayProdutos.filter(item => item.nome !== nomeDeletado)
         props.setSoma(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
@@ -23,4 +22,3 @@ export function Carrinho(props) {
         </section>
     )
         }
-        

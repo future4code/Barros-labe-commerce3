@@ -3,7 +3,7 @@ import styled from 'styled-components'
 //Estilização dno app.js
 export const ContainerGeral = styled.section `
     font-family: Arial, Helvetica, sans-serif;
-    margin: 30px 60px;
+    margin: 30px 50px;
 `
 
 
@@ -14,8 +14,12 @@ export const Produto = styled.section `
     gap: 15px;
     border: 1px solid black;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.267);
-    padding: 15px 0;
+    padding: 0 0 25px 0;
     align-items: center;
+    h3 {
+        text-align: center;
+        padding: 0 12px;
+    }
     button {
         width: 50%;
         font-size: 16px;
@@ -29,7 +33,7 @@ export const Produto = styled.section `
         }
     }
     img {
-        width: 90%;
+        width: 100%;
     }
 `
 
@@ -100,9 +104,7 @@ export const ContainerFiltrosProdutos = styled.section `
 
 //COMPONENTE FILTROS
 
-export const Filtros = styled.section `
 
-`
 
 
 
