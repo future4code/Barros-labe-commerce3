@@ -13,7 +13,7 @@ export function Filtros() {
     return (
         <ContainerFiltrosProdutos>
             <form>
-                <h3>FILTRO</h3>
+                <h3>FILTRAR PRODUTOS</h3>
 
                 <label> Valor mínimo:</label>
                 <input type="text" value={filtroValorMinimo} onChange={e => setFiltroValorMinimo(e.target.value)}></input>
