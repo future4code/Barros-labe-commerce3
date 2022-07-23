@@ -1,24 +1,23 @@
 import React from "react"
 import { ProdAddCarrinho } from "./ProdAddCarrinho"
-
+import {SectionCarrinho} from "../style"
 
 export function Carrinho(props) {
+  
+    const remover = props.remover
 
-    const handleRemover = (nomeDeletado) => {
-        const arrayAtualizado = props.arrayProdutos.filter(item => item.nome !== nomeDeletado)
-        props.setSoma(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
-        return props.setArrayProdutos(arrayAtualizado)
-    }
+    //const renderSoma = localStorage.getItem("soma")
+    //const renderArray = JSON.parse(localStorage.getItem("arrayProdutos"))
 
 
     return (
-        <section>
-            <h2>Carrinho:</h2>
+        <SectionCarrinho>
+            <h3>CARRINHO</h3>
             {
             (props.arrayProdutos.length > 0) &&
-            (props.arrayProdutos.map((item, index) => <ProdAddCarrinho key={index} nome={item.nome} quantidade={item.quantidade} handleRemover={() => handleRemover(item.nome)}/>))
+            (props.arrayProdutos.map((item, index) => <ProdAddCarrinho key={index} nome={item.nomeAbr} quantidade={item.quantidade} handleRemover={() => remover(item.nome)}/>))
             }
             <p>Valor Total: R${props.soma}.000,00</p>
-        </section>
+        </SectionCarrinho>
     )
-        }
+}

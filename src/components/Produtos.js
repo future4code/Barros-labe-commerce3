@@ -8,31 +8,48 @@ import { ProdutoUnico } from './ProdutoUnico'
 
 
 export function Produtos(props) {
-    
+
     const [sort, setSort] = useState("crescente")
     const [arrayProdCarrinho, setArrayProdCarrinho] = useState([])
     const [somaCarrinho, setSomaCarrinho] = useState(0)
-    
+        
+
+    /*useEffect(() => {
+        const array = localStorage.getItem("arrayProdutos")
+        const soma = localStorage.getItem("soma")
+        if (array) {
+            const renderArray = JSON.parse(array)
+            setArrayProdCarrinho(renderArray)
+            setSomaCarrinho(soma)
+        }
+    }, [])*/
+
 
     //Ao clicar no botão de adicionar ao carrinho
     const handleOnClick = (nomeSelecionado) => { 
-
-        let arrayAtualizado = arrayProdCarrinho
-
+    
         if (arrayProdCarrinho.length === 0) {
-            arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
+            let arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
             setSomaCarrinho(somaCarrinho + (arrayAtualizado[0].preco))
+            //localStorage.setItem("soma", ""+somaCarrinho)
+            //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
             return setArrayProdCarrinho([...arrayAtualizado])
+
         } else {
+            let arrayAtualizado = arrayProdCarrinho
             for (let i = 0; i < arrayAtualizado.length; i++) {
                 if (nomeSelecionado === arrayAtualizado[i].nome) {
                     arrayAtualizado[i].quantidade += 1
                     setSomaCarrinho(somaCarrinho + arrayAtualizado[i].preco)
+                    //localStorage.setItem("soma", ""+somaCarrinho)
+                    //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
                     return setArrayProdCarrinho([...arrayAtualizado])
                 }
                 if (i === arrayAtualizado.length - 1) {
                     arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
                     setSomaCarrinho(somaCarrinho + arrayAtualizado[arrayAtualizado.length-1].preco)
+                    //localStorage.setItem("soma", ""+somaCarrinho)
+                    //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
                     return setArrayProdCarrinho([...arrayProdCarrinho, ...arrayAtualizado])
                 }
             }
@@ -44,18 +61,10 @@ export function Produtos(props) {
     const handleRemover = (nomeDeletado) => {
         const arrayAtualizado = arrayProdCarrinho.filter(item => item.nome !== nomeDeletado)
         setSomaCarrinho(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
+        //localStorage.setItem("soma", ""+somaCarrinho)
+        //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
         return setArrayProdCarrinho(arrayAtualizado)
-    }
-
-
-    //Salvando os dados do carrinho no local storage
-    localStorage.setItem("soma", ""+somaCarrinho)
-    localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
-    
-    
-    const renderSoma = localStorage.getItem("soma")
-    const renderArray = JSON.parse(localStorage.getItem("arrayProdutos"))
-   
+    }  
 
 
     //Renderizar todos os produtos (quando nenhum filtro é usado)
@@ -118,7 +127,7 @@ export function Produtos(props) {
 
     
      
-        return (
+    return (
         <ContainerProdutosCarrinho>
             <section>
                 <aside>
@@ -139,7 +148,7 @@ export function Produtos(props) {
                 </div>
             </section>
 
-            <Carrinho renderArray={renderArray} renderSoma={renderSoma} remover={handleRemover} />
-       </ContainerProdutosCarrinho>
+            <Carrinho remover={handleRemover} soma={somaCarrinho} arrayProdutos={arrayProdCarrinho}/>
+        </ContainerProdutosCarrinho>
     )
 }
