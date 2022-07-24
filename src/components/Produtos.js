@@ -59,7 +59,12 @@ export function Produtos(props) {
     
     //Removendo itens do carrinho
     const handleRemover = (nomeDeletado) => {
-        const arrayAtualizado = arrayProdCarrinho.filter(item => item.nome !== nomeDeletado)
+        const arrayAtualizado = arrayProdCarrinho.filter(item => {
+            if (nomeDeletado === item.nome) {
+                item.quantidade = 1
+            }
+            return item.nome !== nomeDeletado
+        })
         setSomaCarrinho(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
         return setArrayProdCarrinho(arrayAtualizado)
     }  
