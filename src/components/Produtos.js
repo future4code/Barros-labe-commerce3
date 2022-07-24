@@ -31,8 +31,6 @@ export function Produtos(props) {
         if (arrayProdCarrinho.length === 0) {
             let arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
             setSomaCarrinho(somaCarrinho + (arrayAtualizado[0].preco))
-            //localStorage.setItem("soma", ""+somaCarrinho)
-            //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
             return setArrayProdCarrinho([...arrayAtualizado])
 
         } else {
@@ -41,15 +39,11 @@ export function Produtos(props) {
                 if (nomeSelecionado === arrayAtualizado[i].nome) {
                     arrayAtualizado[i].quantidade += 1
                     setSomaCarrinho(somaCarrinho + arrayAtualizado[i].preco)
-                    //localStorage.setItem("soma", ""+somaCarrinho)
-                    //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
                     return setArrayProdCarrinho([...arrayAtualizado])
                 }
                 if (i === arrayAtualizado.length - 1) {
                     arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
                     setSomaCarrinho(somaCarrinho + arrayAtualizado[arrayAtualizado.length-1].preco)
-                    //localStorage.setItem("soma", ""+somaCarrinho)
-                    //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
                     return setArrayProdCarrinho([...arrayProdCarrinho, ...arrayAtualizado])
                 }
             }
@@ -61,8 +55,6 @@ export function Produtos(props) {
     const handleRemover = (nomeDeletado) => {
         const arrayAtualizado = arrayProdCarrinho.filter(item => item.nome !== nomeDeletado)
         setSomaCarrinho(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
-        //localStorage.setItem("soma", ""+somaCarrinho)
-        //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
         return setArrayProdCarrinho(arrayAtualizado)
     }  
 
