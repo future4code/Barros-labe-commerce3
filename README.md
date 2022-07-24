@@ -10,6 +10,6 @@
 * Ao recarregar a página, os produtos salvos no carrinho e o valor total do carrinho ficam salvos no navegador.
 
 ### Link do surge
-https://deserted-friends.surge.sh/
+https://deadpan-game.surge.sh/
 
 
