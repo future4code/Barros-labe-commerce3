@@ -6,10 +6,6 @@ export function Carrinho(props) {
   
     const remover = props.remover
 
-    //const renderSoma = localStorage.getItem("soma")
-    //const renderArray = JSON.parse(localStorage.getItem("arrayProdutos"))
-
-
     return (
         <SectionCarrinho>
             <h3>CARRINHO</h3>
