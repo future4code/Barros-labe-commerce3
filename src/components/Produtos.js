@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import {ContainerProdutosCarrinho} from '../style'
+import React, {useState, useEffect} from 'react'
+import {ContainerProdutosCarrinho, ContainerSuperior, ContainerProdutos} from '../style'
 import {MockDeDados} from '../MockDeDados'
 import {Carrinho} from './Carrinho'
 import { ProdutoUnico } from './ProdutoUnico'
@@ -10,27 +10,34 @@ import { ProdutoUnico } from './ProdutoUnico'
 export function Produtos(props) {
 
     const [sort, setSort] = useState("crescente")
-    const [arrayProdCarrinho, setArrayProdCarrinho] = useState([])
-    const [somaCarrinho, setSomaCarrinho] = useState(0)
-        
+    
+    //Função adicionada dentro do useState para garantir que a renderização dos produtos salvos no carrinho permaneça depois de recarregar a página
+    const [arrayProdCarrinho, setArrayProdCarrinho] = useState(() => {
+        const arraySalvo = JSON.parse(localStorage.getItem("arrayProdutos"))
+        return arraySalvo || []
+    })
+    
 
-    /*useEffect(() => {
-        const array = localStorage.getItem("arrayProdutos")
-        const soma = localStorage.getItem("soma")
-        if (array) {
-            const renderArray = JSON.parse(array)
-            setArrayProdCarrinho(renderArray)
-            setSomaCarrinho(soma)
-        }
-    }, [])*/
+    const [somaCarrinho, setSomaCarrinho] = useState(() => {
+        const somaSalva = localStorage.getItem("soma")
+        return somaSalva || 0
+    })
+    
+    
+    //UseEffect para salvar no local storage as informações do carrinho
+    useEffect(()=> {
+        localStorage.setItem("soma", ""+somaCarrinho)
+        localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
+    }, [somaCarrinho, arrayProdCarrinho])
 
 
     //Ao clicar no botão de adicionar ao carrinho
     const handleOnClick = (nomeSelecionado) => { 
-    
+        
         if (arrayProdCarrinho.length === 0) {
             let arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
-            setSomaCarrinho(somaCarrinho + (arrayAtualizado[0].preco))
+            setSomaCarrinho(parseInt(somaCarrinho) + parseInt((arrayAtualizado[0].preco)))
+            
             //localStorage.setItem("soma", ""+somaCarrinho)
             //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
             return setArrayProdCarrinho([...arrayAtualizado])
@@ -40,30 +47,33 @@ export function Produtos(props) {
             for (let i = 0; i < arrayAtualizado.length; i++) {
                 if (nomeSelecionado === arrayAtualizado[i].nome) {
                     arrayAtualizado[i].quantidade += 1
-                    setSomaCarrinho(somaCarrinho + arrayAtualizado[i].preco)
+                    setSomaCarrinho(parseInt(somaCarrinho) + parseInt(arrayAtualizado[i].preco))
+                    setArrayProdCarrinho([...arrayAtualizado])
                     //localStorage.setItem("soma", ""+somaCarrinho)
                     //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
-                    return setArrayProdCarrinho([...arrayAtualizado])
+                    return
                 }
                 if (i === arrayAtualizado.length - 1) {
                     arrayAtualizado = MockDeDados.filter((item) => nomeSelecionado === item.nome)
-                    setSomaCarrinho(somaCarrinho + arrayAtualizado[arrayAtualizado.length-1].preco)
+                    setSomaCarrinho(parseInt(somaCarrinho) + parseInt(arrayAtualizado[arrayAtualizado.length-1].preco))
+                    setArrayProdCarrinho([...arrayProdCarrinho, ...arrayAtualizado])
                     //localStorage.setItem("soma", ""+somaCarrinho)
                     //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
-                    return setArrayProdCarrinho([...arrayProdCarrinho, ...arrayAtualizado])
+                    return
                 }
             }
-        }    
+        }
     }
 
-
+    
     //Removendo itens do carrinho
     const handleRemover = (nomeDeletado) => {
         const arrayAtualizado = arrayProdCarrinho.filter(item => item.nome !== nomeDeletado)
         setSomaCarrinho(arrayAtualizado.reduce((prev, atual) => prev + (atual.preco * atual.quantidade), 0))
+        setArrayProdCarrinho(arrayAtualizado)
         //localStorage.setItem("soma", ""+somaCarrinho)
         //localStorage.setItem("arrayProdutos", JSON.stringify(arrayProdCarrinho))
-        return setArrayProdCarrinho(arrayAtualizado)
+        return
     }  
 
 
@@ -130,22 +140,20 @@ export function Produtos(props) {
     return (
         <ContainerProdutosCarrinho>
             <section>
-                <aside>
+                <ContainerSuperior>
                     <p>Quantidade de produtos: {props.quantidade}</p>
                 
-                    <div>
-                        <label htmlFor={"ordenacao"}>Ordenação:</label>
-                        <select name={"ordenacao"} onChange={e => setSort(e.target.value)}>
-                            <option value={"crescente"}>Crescente</option>
-                            <option value={"decrescente"}>Decrescente</option>
-                        </select>
-                    </div>
-                </aside>
+                    <label htmlFor={"ordem"}>Ordem:</label>
+                    <select name={"ordem"} onChange={e => setSort(e.target.value)}>
+                        <option value={"crescente"}>Crescente</option>
+                        <option value={"decrescente"}>Decrescente</option>
+                    </select>
+                </ContainerSuperior>
             
-                <div>
+                <ContainerProdutos>
                     {(props.valorMin === '' && props.valorMax === '' && props.buscaNome === '') && todosProdutos()}
                     {(props.valorMin !== '' || props.valorMax !== '' || props.buscaNome !== '') && algunsProdutos()}
-                </div>
+                </ContainerProdutos>
             </section>
 
             <Carrinho remover={handleRemover} soma={somaCarrinho} arrayProdutos={arrayProdCarrinho}/>

@@ -20,11 +20,13 @@ export const Produto = styled.section `
         padding: 0 12px;
     }
     p {
+        text-align: center;
         font-size: 14px;
         margin: 15px 0;
     }
     button {
         font-size: 14px;
+        margin: 0 auto;
         width: 50%;
         border-radius: 10px;
         border: none;
@@ -43,37 +45,37 @@ export const Produto = styled.section `
 
 export const ContainerProdutosCarrinho = styled.section `
     display: flex;
-    section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        aside {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 0 30px;
-            background-color: rgb(226, 226, 226);
-            width: 86%;
-            p {
-                margin-left: 30px;
-                margin-top: 27px;
-            }
-            select {
-                padding: 8px;
-                width: 120px;
-            }
-        }
-        div {
-            display: grid;
-            grid-template-columns: 30% 30% 30%;
-            justify-content: center;
-            gap: 30px;
-            padding: 20px;
-        }
-    }
+`
+
+export const ContainerProdutos = styled.section `
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    min-width: 730px;
 `
 
 
+export const ContainerSuperior = styled.aside `
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    margin: 0 auto;
+    background-color: rgb(226, 226, 226);
+    width: 87%;
+    height: 70px;
+    select {
+        padding: 8px;
+        width: 120px;
+        height: 35px;
+    }
+
+    label {
+        padding-left: 530px;
+        margin-right: 15px;
+    }
+`
 
 
 //COMPONENTE FILTROS
@@ -86,8 +88,9 @@ export const ContainerFiltrosProdutos = styled.section `
         background-color: rgb(226, 226, 226);
         padding: 30px 30px;
         min-height: 90vh;
+        max-width: 150px;
         h3 {
-            padding: 10px 20px 35px 20px;
+            padding: 0 20px 35px 5px;
             height: 5vh;
             text-align: center;
             font-size: 24px;
@@ -111,10 +114,11 @@ export const ContainerFiltrosProdutos = styled.section `
 export const SectionCarrinho = styled.section `
     background-color: rgb(226, 226, 226);
     padding: 30px 30px;
+
     min-height: 90vh;
     min-width: 200px;
     h3 {
-        padding: 10px 20px 35px 20px;
+        padding: 0 20px 35px 20px;
         height: 5vh;
         text-align: center;
         font-size: 24px;
@@ -124,7 +128,7 @@ export const SectionCarrinho = styled.section `
 export const ProdutoCarrinho = styled.section `
     border: 1px solid black;
     width: 150px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
     padding: 15px;
     p {
         font-size: 16px;
@@ -135,6 +139,8 @@ export const ProdutoCarrinho = styled.section `
         font-size: 16px;
         padding: 5px;
         cursor: pointer;
+        display: block;
+        margin: 0 auto;
     }
 `
 
