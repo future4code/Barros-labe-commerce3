@@ -10,7 +10,7 @@
 * Ao recarregar a página, os produtos salvos no carrinho e o valor total do carrinho ficam salvos no navegador.
 
 ### Imagens
-![Print1]()
+![Print1](./printLabecommerce)
 ![Print2]()
 ![Print3]()
 
