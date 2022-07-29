@@ -11,8 +11,10 @@
 
 ### Imagens
 ![Print1](./print-labcommerce.png)
-![Print2]()
-![Print3]()
+
+![Print2](./print-labcommerce2.png)
+
+![Print3](./print-labcommerce3.png)
 
 ### Link do surge
 https://deadpan-game.surge.sh/
