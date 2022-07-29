@@ -9,6 +9,8 @@
 * Valor total de todos os produtos adicionados ao carrinho.
 * Ao recarregar a página, os produtos salvos no carrinho e o valor total do carrinho ficam salvos no navegador.
 
+### Imagens
+
 ### Link do surge
 https://deadpan-game.surge.sh/
 
